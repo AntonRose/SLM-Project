@@ -30,8 +30,8 @@ Reader::Reader(const std::string& file_path) {
     char c;
     while (in.get(c)) {
         unsigned char u = static_cast<unsigned char>(c);
-        if (u > 127) continue;                  // skip non-ASCII bytes
-        if (c == '\n' || c == '\r') continue;   // skip newlines
+        if (u > 127) continue;
+        if (c == '\n' || c == '\r') continue; 
         chars_.push_back(static_cast<char>(std::tolower(u)));
     }
 }
