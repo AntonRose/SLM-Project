@@ -8,10 +8,13 @@
 // Look up the next character distribution 
 
 Model::Model(std::size_t k, double alpha)
- : k_(k), alpha_(alpha), rng_(12345) {
+ : k_(k), alpha_(alpha), rng_(std::random_device{}()) {
     if (alpha < 0.0) {
         throw std::runtime_error("Enter alpha >= 0");
     } 
+    if (k < 1) {
+        throw std::invalid_argument("k must be at least 1");
+    }
 }
 
 void Model::train(const std::vector<char>& chars) {
@@ -91,6 +94,10 @@ std::string Model::random_kgram() {
 std::string Model::generate(std::size_t length, std::ostream& out) {
     if (counts_.empty()) {
         throw std::runtime_error("No training text");
+    }
+
+    if (length < k_) {
+        throw std::runtime_error("Give a length larger than k");
     }
 
     std::string window = random_kgram();
