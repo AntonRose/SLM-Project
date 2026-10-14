@@ -34,11 +34,10 @@ void Model::train(const std::vector<char>& chars) {
         char next = chars[i + k_];
         
         counts_[kgram][next]++;
-
-        for (char c : chars) {
+        }  
+    for (char c : chars) {
             alphabet_.insert(c);
-        }
-    }   
+        } 
 }
 char Model::sample_next(const std::string& kgram) {
     auto it = counts_.find(kgram);

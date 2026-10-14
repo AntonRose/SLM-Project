@@ -1,2 +1,6 @@
 greet
 greet.cpp
+Makefile
+slm
+test1
+*.o
