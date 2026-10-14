@@ -15,14 +15,17 @@
 
 int main() {
     try {
+        // std::string s = "chicken burger chips please boss";
+        // std::vector<char> text(s.begin(), s.end());
+
         Reader reader("a_modest_proposal.txt");
         std::cout << reader.chars().size() << " characters loaded\n";
         const std::vector<char>& book = reader.chars();  
 
         
-        Model model(3, 0.1);
+        Model model(5, 0.0);
         model.train(book);
-        model.generate(500);
+        model.generate(200);
         std::cout << '\n';
     } 
     

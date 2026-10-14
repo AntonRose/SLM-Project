@@ -96,12 +96,14 @@ std::string Model::generate(std::size_t length, std::ostream& out) {
     std::string window = random_kgram();
     std::string output = window;
 
+    out << window;
+
     for (std::size_t i = 0; i < length; ++i) {
         char next = sample_next(window);
         out << next;
         output.push_back(next);
 
-        window.erase(0.1);
+        window.erase(0, 1);
         window.push_back(next);
     }
 
