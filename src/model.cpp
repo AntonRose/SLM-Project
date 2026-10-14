@@ -35,8 +35,8 @@ void Model::train(const std::vector<char>& chars) {
         for (char c : chars) {
             alphabet_.insert(c);
         }
+    }   
 }
-
 char Model::sample_next(const std::string& kgram) {
     auto it = counts_.find(kgram);
 
@@ -88,6 +88,22 @@ std::string Model::random_kgram() {
     return kgrams[dist(rng_)];
 }
 
-std::string Model::generate(std::size_t length) {
-    
+std::string Model::generate(std::size_t length, std::ostream& out) {
+    if (counts_.empty()) {
+        throw std::runtime_error("No training text");
+    }
+
+    std::string window = random_kgram();
+    std::string output = window;
+
+    for (std::size_t i = 0; i < length; ++i) {
+        char next = sample_next(window);
+        out << next;
+        output.push_back(next);
+
+        window.erase(0.1);
+        window.push_back(next);
+    }
+
+    return output;
 }
