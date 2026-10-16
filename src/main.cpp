@@ -15,11 +15,9 @@
 
 
 int main(int argc, char* argv[]) {
-    std::cerr << "main started, argc=" << argc << '\n';
+    // std::cerr << "main started, argc=" << argc << '\n';
 
     try {
-        // std::string s = "chicken burger chips please boss";
-        // std::vector<char> text(s.begin(), s.end());
 
         double alpha = 0.0;
         int i = 1;
@@ -56,35 +54,27 @@ int main(int argc, char* argv[]) {
         throw std::invalid_argument("length must be an integer");
         }
 
-        std::cerr << "alpha=" << alpha << " k=" << k
-          << " file=" << file << " length=" << length << '\n';
-
-        // Reader reader(file);
-        // std::cout << reader.chars().size() << " characters loaded\n";
-        // const std::vector<char>& text = reader.chars();  
-
-        
-        // Model model(k, alpha);
-        // model.train(text);
+        // std::cerr << "alpha=" << alpha << " k=" << k
+        //   << " file=" << file << " length=" << length << '\n';
         // model.generate(length);
         
-        auto t0 = std::chrono::steady_clock::now();
+        // auto t0 = std::chrono::steady_clock::now();
         Reader reader(file);
-        auto t1 = std::chrono::steady_clock::now();
+        // auto t1 = std::chrono::steady_clock::now();
         Model model(k, alpha);
         model.train(reader.chars());
-        auto t2 = std::chrono::steady_clock::now();
+        // auto t2 = std::chrono::steady_clock::now();
         model.generate(length);
-        auto t3 = std::chrono::steady_clock::now();
+        // auto t3 = std::chrono::steady_clock::now();
 
-        std::chrono::duration<double> read = t1 - t0, train = t2 - t1, gen = t3 - t2;
-        std::cerr << "read " << read.count() << " s, train " << train.count()
-          << " s, generate " << gen.count() << " s\n";
+        // std::chrono::duration<double> read = t1 - t0, train = t2 - t1, gen = t3 - t2;
+        // std::cerr << '\n' << '\n' << "read " << read.count() << " s, train " << train.count()
+        //   << " s, generate " << gen.count() << " s\n";
 
-          std::cout << '\n';
-        }
+        //   std::cout << '\n';
+        // }
 
-
+    }
         catch (const std::exception& e) {
         std::cerr << "Error: " << e.what() << '\n';
         return 1;
@@ -92,5 +82,3 @@ int main(int argc, char* argv[]) {
 
     return 0;
 } 
-    
-    

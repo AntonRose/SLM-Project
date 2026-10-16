@@ -90,21 +90,31 @@ std::string Model::random_kgram() {
     return kgrams[dist(rng_)];
 }
 
-std::string Model::generate(std::size_t length, std::ostream& out) {
+std::string Model::generate(int length, std::ostream& out) {
+    
+    if (static_cast<int>(k_) <= 0) {
+        throw std::runtime_error("k must be a positive integer");
+    }
     if (counts_.empty()) {
         throw std::runtime_error("No training text");
     }
 
-    if (length < k_) {
-        throw std::runtime_error("Give a length larger than k");
+
+    if (length < static_cast<int>(k_)) {
+        throw std::runtime_error("Give a positive length larger than k");
     }
+
+    if (counts_.empty()) {
+        throw std::runtime_error("No training text");
+    }
+
 
     std::string window = random_kgram();
     std::string output = window;
 
     out << window;
 
-    for (std::size_t i = 0; i < length; ++i) {
+    for (int i = 0; i < length; ++i) {
         char next = sample_next(window);
         out << next;
         output.push_back(next);

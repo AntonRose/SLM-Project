@@ -11,7 +11,7 @@ class Model {
 public:
     Model(std::size_t k, double alpha = 0.0);
     void train(const std::vector<char>& chars);
-    std::string generate(std::size_t length, std::ostream& out = std::cout);
+    std::string generate(int length, std::ostream& out = std::cout);
 
 private:
     char sample_next(const std::string& kgram);
